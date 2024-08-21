@@ -1,0 +1,50 @@
+import time
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import select
+from selenium.webdriver.common.keys import Keys
+
+driver = webdriver.Chrome()
+driver.maximize_window()
+driver.get("https://www.facebook.com/")
+time.sleep(5)
+
+# to fire up a new tab using javascript and load google.com
+driver.execute_script('''window.open("https://www.amazon.com" )''')
+time.sleep(5)
+driver.execute_script('''window.open("https://www.flipcard.com")''')
+time.sleep(5)
+driver.execute_script('''window.open("https://www.gmail.com")''')
+time.sleep(5)
+driver.execute_script('''window.open("https://www.myntra.com")''')
+time.sleep(5)
+all_handles = driver.window_handles
+
+
+webPage = "Facebook"
+webpageTitle = "log in or sign up"
+webPage1 ="Myntra"
+webpageTitle1 = "Online Shopping for Women, Men, Kids Fashion & Lifestyle"
+webPage2 = "Gmail"
+webpageTitle2 ="Gmail"
+webPage3 = "flipcard.com"
+webpageTitle3 = "This website is for sale! flipkart Resources and Information."
+webPage4 = "Amazon.com"
+webpageTitle4 = "Online Shopping for Electronics, Apparel, Computers, Books, DVDs & more"
+
+handlerDictionary = {"webPage ":"webpageTitle","webPage1":"webpageTitle1","webPage2 ": "webpageTitle2","webPage3 ": "webpageTitle3" ,"webPage4 ": "webpageTitle4"}
+
+# for handle in all_handles:
+#  if(handle == webPage1):
+#    pass
+#  print('ture')
+# else:
+#   print('false')
+urlHandle = {}
+for handle in all_handles:
+     driver.switch_to.window(handle)
+urlHandle.update({driver.current_url: handle})
+
+print(urlHandle)
+
